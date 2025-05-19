@@ -27,30 +27,30 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "../../qcustomplot.h"
+
+#include <qcp/qcp.h>
 
 namespace Ui {
 class MainWindow;
 }
 
-class MainWindow : public QMainWindow
-{
-  Q_OBJECT
-  
+class MainWindow : public QMainWindow {
+    Q_OBJECT
+
 public:
-  explicit MainWindow(QWidget *parent = 0);
-  ~MainWindow();
-  
-  void setupPlot();
-  
+    explicit MainWindow(QWidget *parent = 0);
+    ~MainWindow();
+
+    void setupPlot();
+
 private slots:
-  void horzScrollBarChanged(int value);
-  void vertScrollBarChanged(int value);
-  void xAxisChanged(QCPRange range);
-  void yAxisChanged(QCPRange range);
-  
+    void horzScrollBarChanged(int value);
+    void vertScrollBarChanged(int value);
+    void xAxisChanged(QCPRange range);
+    void yAxisChanged(QCPRange range);
+
 private:
-  Ui::MainWindow *ui;
+    Ui::MainWindow *ui;
 };
 
-#endif // MAINWINDOW_H
+#endif  // MAINWINDOW_H

@@ -1,59 +1,34 @@
-# OS Related:
+# Prerequisites
+*.d
 
-*~
-Thumbs.db
-desktop.ini
-.DS_Store
-
-# Qt Related:
-
-build-release/
-build-debug/
-*-build-*-Release/
-*-build-*-Debug/
-build-*/
-*.pro.user*
-Makefile*
-moc_*.cpp
-moc_*.h
-qrc_*.cpp
-ui_*.h
-*.log
-*.qch
-*.qm
-*.ts
-*.autosave
-*.moc
-.qmake.stash
-object_script.*
-
-# Python:
-
-.idea/
-*.pyc
-__pycache__/
-
-# Compilation Binaries:
-
+# Compiled Object files
+*.slo
+*.lo
 *.o
-*.ar
-*.gz
-*.bz2
-*.xz
-*.tar
-*.a
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
 *.so
-*.lib
+*.dylib
 *.dll
+
+# Fortran module files
+*.mod
+*.smod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
 *.exe
+*.out
+*.app
 
-# Tool output:
-
-callgrind.out.*
-cachegrind.out.*
-
-# Amalgamated sources:
-
-/qcustomplot.h
-/qcustomplot.cpp
-
+build/*
