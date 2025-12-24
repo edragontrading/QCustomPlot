@@ -457,6 +457,9 @@ double QCPAxisTicker::cleanMantissa(double input) const {
     double magnitude;
     const double mantissa = getMantissa(input, &magnitude);
     switch (mTickStepStrategy) {
+        case tssIntegerTick: {
+            return pickClosest(mantissa, QVector<double>() << 1.0 << 2.0 << 5.0 << 10.0) * magnitude;
+        }
         case tssReadability: {
             return pickClosest(mantissa, QVector<double>() << 1.0 << 2.0 << 2.5 << 5.0 << 10.0) * magnitude;
         }
@@ -470,4 +473,17 @@ double QCPAxisTicker::cleanMantissa(double input) const {
         }
     }
     return input;
+}
+
+bool QCPAxisTicker::validRange(const QCPRange &range) {
+    if (mTickStepStrategy != tssIntegerTick) {
+        return true;
+    }
+
+    double tickStep = getTickStep(range);
+    if (tickStep < 1.0) {
+        return false;
+    }
+
+    return true;
 }

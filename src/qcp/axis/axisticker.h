@@ -44,6 +44,9 @@ public:
             ,
         tssMeetTickCount  ///< Less readable tick steps are allowed which in turn
                           ///< facilitates getting closer to the requested tick count
+            ,
+        tssIntegerTick  ///< A nicely readable tick step is prioritized over matching
+                        ///< the requested number of ticks (see \ref setTickCount)
     };
     Q_ENUMS(TickStepStrategy)
 
@@ -69,6 +72,8 @@ public:
     // introduced virtual methods:
     virtual void generate(const QCPRange &range, const QLocale &locale, QChar formatChar, int precision,
                           QVector<double> &ticks, QVector<double> *subTicks, QVector<QString> *tickLabels);
+
+    virtual bool validRange(const QCPRange &range);
 
 protected:
     // property members:

@@ -24,7 +24,6 @@
 ****************************************************************************/
 
 #include <qcp/axis/axis.h>
-
 #include <qcp/core.h>
 #include <qcp/item.h>
 #include <qcp/layoutelements/layoutelement-axisrect.h>
@@ -573,6 +572,8 @@ void QCPAxis::setRange(const QCPRange &range) {
     if (range.lower == mRange.lower && range.upper == mRange.upper) return;
 
     if (!QCPRange::validRange(range)) return;
+    if (!mTicker->validRange(range)) return;
+
     QCPRange oldRange = mRange;
     if (mScaleType == stLogarithmic) {
         mRange = range.sanitizedForLogScale();
@@ -639,6 +640,8 @@ void QCPAxis::setRange(double lower, double upper) {
     if (lower == mRange.lower && upper == mRange.upper) return;
 
     if (!QCPRange::validRange(lower, upper)) return;
+    if (!mTicker->validRange(QCPRange(lower, upper))) return;
+
     QCPRange oldRange = mRange;
     mRange.lower = lower;
     mRange.upper = upper;
@@ -681,6 +684,12 @@ void QCPAxis::setRangeLower(double lower) {
 
     QCPRange oldRange = mRange;
     mRange.lower = lower;
+
+    if (!mTicker->validRange(mRange)) {
+        mRange = oldRange;
+        return;
+    }
+
     if (mScaleType == stLogarithmic) {
         mRange = mRange.sanitizedForLogScale();
     } else {
@@ -699,6 +708,12 @@ void QCPAxis::setRangeUpper(double upper) {
 
     QCPRange oldRange = mRange;
     mRange.upper = upper;
+
+    if (!mTicker->validRange(mRange)) {
+        mRange = oldRange;
+        return;
+    }
+
     if (mScaleType == stLogarithmic) {
         mRange = mRange.sanitizedForLogScale();
     } else {
@@ -1257,6 +1272,12 @@ void QCPAxis::moveRange(double diff) {
         mRange.lower *= diff;
         mRange.upper *= diff;
     }
+
+    if (!mTicker->validRange(mRange)) {
+        mRange = oldRange;
+        return;
+    }
+
     emit rangeChanged(mRange);
     emit rangeChanged(mRange, oldRange);
 }
@@ -1307,6 +1328,12 @@ void QCPAxis::scaleRange(double factor, double center) {
                         "sign domain as range:"
                      << center;
     }
+
+    if (!mTicker->validRange(mRange)) {
+        mRange = oldRange;
+        return;
+    }
+
     emit rangeChanged(mRange);
     emit rangeChanged(mRange, oldRange);
 }

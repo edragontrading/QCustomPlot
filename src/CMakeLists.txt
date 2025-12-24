@@ -46,6 +46,9 @@ set(qcustomplot_SRCS
     qcp/items/item-line.cpp
     qcp/items/item-curve.cpp
     qcp/items/item-rect.cpp
+    qcp/items/item-triangle.cpp
+    qcp/items/item-parallel.cpp
+    qcp/items/item-angle.cpp
     qcp/items/item-text.cpp
     qcp/items/item-ellipse.cpp
     qcp/items/item-pixmap.cpp
@@ -98,6 +101,9 @@ set(qcustomplot_HEADERS
     qcp/items/item-line.h
     qcp/items/item-curve.h
     qcp/items/item-rect.h
+    qcp/items/item-triangle.h
+    qcp/items/item-parallel.h
+    qcp/items/item-angle.h
     qcp/items/item-text.h
     qcp/items/item-ellipse.h
     qcp/items/item-pixmap.h

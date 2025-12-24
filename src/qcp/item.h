@@ -208,12 +208,16 @@ public:
     bool selected() const {
         return mSelected;
     }
+    bool allowFilledRect() const {
+        return mAllowFilledRect;
+    }
 
     // setters:
     void setClipToAxisRect(bool clip);
     void setClipAxisRect(QCPAxisRect *rect);
     Q_SLOT void setSelectable(bool selectable);
     Q_SLOT void setSelected(bool selected);
+    Q_SLOT void setAllowFilledRect(bool allowed);
 
     // reimplemented virtual methods:
     virtual double selectTest(const QPointF &pos, bool onlySelectable,
@@ -233,6 +237,7 @@ public:
 signals:
     void selectionChanged(bool selected);
     void selectableChanged(bool selectable);
+    void drawingCompleted(bool cancelled);
 
 protected:
     // property members:
@@ -240,7 +245,7 @@ protected:
     QPointer<QCPAxisRect> mClipAxisRect;
     QList<QCPItemPosition *> mPositions;
     QList<QCPItemAnchor *> mAnchors;
-    bool mSelectable, mSelected;
+    bool mSelectable, mSelected, mAllowFilledRect;
 
     // reimplemented virtual methods:
     virtual QCP::Interaction selectionCategory() const Q_DECL_OVERRIDE;

@@ -46,6 +46,9 @@
 #include <qcp/items/item-line.h>
 #include <qcp/items/item-pixmap.h>
 #include <qcp/items/item-rect.h>
+#include <qcp/items/item-triangle.h>
+#include <qcp/items/item-angle.h>
+#include <qcp/items/item-parallel.h>
 #include <qcp/items/item-straightline.h>
 #include <qcp/items/item-text.h>
 #include <qcp/items/item-tracer.h>

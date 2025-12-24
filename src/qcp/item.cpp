@@ -23,10 +23,9 @@
 **          Version: 2.1.1                                                **
 ****************************************************************************/
 
-#include <qcp/item.h>
-
 #include <qcp/axis/axis.h>
 #include <qcp/core.h>
+#include <qcp/item.h>
 #include <qcp/layoutelements/layoutelement-axisrect.h>
 #include <qcp/painter.h>
 
@@ -949,7 +948,7 @@ void QCPItemPosition::setPixelPosition(const QPointF &pixelPosition) {
   Base class constructor which initializes base class members.
 */
 QCPAbstractItem::QCPAbstractItem(QCustomPlot *parentPlot)
-    : QCPLayerable(parentPlot), mClipToAxisRect(false), mSelectable(true), mSelected(false) {
+    : QCPLayerable(parentPlot), mClipToAxisRect(false), mSelectable(true), mSelected(false), mAllowFilledRect(true) {
     parentPlot->registerItem(this);
 
     QList<QCPAxisRect *> rects = parentPlot->axisRects();
@@ -1033,6 +1032,10 @@ void QCPAbstractItem::setSelected(bool selected) {
         mSelected = selected;
         emit selectionChanged(mSelected);
     }
+}
+
+void QCPAbstractItem::setAllowFilledRect(bool allowed) {
+    mAllowFilledRect = allowed;
 }
 
 /*!
@@ -1153,7 +1156,7 @@ double QCPAbstractItem::rectDistance(const QRectF &rect, const QPointF &pos, boo
     result = qSqrt(minDistSqr);
 
     // filled rect, allow click inside to count as hit:
-    if (filledRect && result > mParentPlot->selectionTolerance() * 0.99) {
+    if (filledRect && mAllowFilledRect && result > mParentPlot->selectionTolerance() * 0.99) {
         if (rect.contains(pos)) result = mParentPlot->selectionTolerance() * 0.99;
     }
     return result;
